@@ -7,6 +7,14 @@ import Login from './login';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const Protect = () => {
+  if(localStorage.getItem('session')){
+    return <App />
+  }else{
+    return <p>forbidden</p>
+  }
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,14 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <>
-          {localStorage.getItem('session') ? (
-            <App />
-            ) : (
-              'forbidden'
-              )
-          }
-        </>,
+        element: <Protect />
       },
     ],
   },
