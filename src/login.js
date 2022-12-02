@@ -1,9 +1,12 @@
 
   import Axios from 'axios';
   import './App.css';
+  import './login.css';
   import { useFormik } from 'formik';
   import * as Yup from 'yup';
   import { useNavigate } from "react-router-dom";
+  import Form from 'react-bootstrap/Form';
+  import Button from 'react-bootstrap/Button';
   
   function Login() {
   const navigate = useNavigate();
@@ -50,43 +53,54 @@
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label
-        style={{ color: 'red', fontSize: 20 }}
-        className='label-username'
-        htmlFor="username"
-      >
-        Username
-      </label>
-      <input
-        id="username"
-        name="username"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.username}
-      />
-      {formik.touched.username && formik.errors.username ? (
-        <div style={{ color: 'red' }}>{formik.errors.username}</div>
-      ) : null}
-      <br />
-      <label htmlFor="password">
-        Password
-      </label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.password}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
-      <br />
-      <button type="submit">Submit</button>
-    </form >
+    <>
+      <div className='login-container'>
+        <div>
+          <img className='login-image' src='https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg' alt='theMovieDB'></img>
+        </div>
+        <div className='rectangle'>
+          <div className='login-page'>
+          <h1>Login Page</h1><br />
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control 
+              id="username"
+              name="username" 
+              type="text" 
+              placeholder="Enter Username"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.username}
+              />
+            </Form.Group>
+            {formik.touched.username && formik.errors.username ? (
+              <div style={{ color: 'red' }}>{formik.errors.username}</div>
+            ) : null}
+            {/* <br /> */}
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control 
+              id="password"
+              name="password"
+              type="password" 
+              placeholder="Password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              />
+            </Form.Group>
+            {formik.touched.password && formik.errors.password ? (
+              <div>{formik.errors.password}</div>
+            ) : null}                     
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+          </div>                  
+        </div>      
+      </div>      
+    </>
   );
 }
 
