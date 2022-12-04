@@ -4,30 +4,24 @@ import Table from 'react-bootstrap/Table';
 import './App.css';
 
 function App() {  
-  const [data, setData] = useState([]);
-  // const [id, setId] = useState('');
-  // const [title, setTitle] = useState('');
-  // const [image, setImage] = useState('');
-  // const [popularity, setPopularity] = useState('');
-  // const [overview, setOverview] = useState('');
-  
+  const [data, setData] = useState([]); 
   const getData = () => {
     Axios.get(`${process.env.REACT_APP_BASEURL}/movie/popular?api_key=${process.env.REACT_APP_APIKEY}&language=en-US&page=1`)
     .then(response => {
       console.log(response);
       setData(response.data.results)
-      // setId(response.data.results[0].id)
-      // setTitle(response.data.results[0].original_title)
-      // setImage(`${process.env.REACT_APP_BASEIMGURL}`+response.data.results[0].backdrop_path)
-      // setPopularity(response.data.results[0].popularity)
-      // setOverview(response.data.results[0].overview)
       console.log(response.data.results[0].id)
     })
-  } 
+  }
   
   const getURL = (path) => {
     const url =  `${process.env.REACT_APP_BASEIMGURL}`+path;
     return url;
+  }
+
+  const logOut = () => {
+    localStorage.clear();
+    return window.location.assign('/');    
   }
 
   useEffect(() => {
@@ -35,7 +29,9 @@ function App() {
   }, []);
 
   return (    
-    <>
+    <> 
+    <br/>
+    <button onClick={() => logOut()}>Logout</button> 
     <h1>FORM PRODUCT TABLE</h1>      
     <Table striped bordered hover variant="dark">
         <thead>

@@ -1,0 +1,31 @@
+.login-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+}
+.rectangle{
+    background: #ffffff;
+    box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.6);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 393px;
+    height: 400px;
+}
+.login-image{
+    width: 329px;
+    height: 400px;
+    box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.6);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    left: 0px;
+    top: 0px;
+}
+.login-page{
+    margin-top: 10px;
+}
+
+#username, #password{
+    margin-left: 25px;    
+    width: 25vw;
+}
