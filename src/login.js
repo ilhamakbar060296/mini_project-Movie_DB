@@ -1,15 +1,11 @@
-
-  import Axios from 'axios';
-  import './App.css';
+  import Axios from 'axios';  
   import './login.css';
   import { useFormik } from 'formik';
   import * as Yup from 'yup';
-  import { useNavigate } from "react-router-dom";
   import Form from 'react-bootstrap/Form';
   import Button from 'react-bootstrap/Button';
   
   function Login() {
-  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -32,8 +28,8 @@
            console.log("Request Token : "+requestToken);
            Axios.post(`${process.env.REACT_APP_BASEURL}authentication/token/validate_with_login?api_key=${process.env.REACT_APP_APIKEY}`,
              {
-               username: values.username, // priambudi.lintang
-               password: values.password, // Fah63FaWT5e$4di
+               username: values.username,
+               password: values.password,
                request_token: requestToken
              }).then(res => {
                const validatedRequestToken = res.data.request_token
@@ -45,7 +41,8 @@
                    const sessionID = res.data.session_id
                    console.log("Session ID : " + sessionID);
                    localStorage.setItem('session', sessionID)
-                   navigate('/home');
+                   localStorage.setItem('username', values.username)                                     
+                   window.location.assign('/home');
                  })
              })
          })
@@ -62,7 +59,7 @@
           <div className='login-page'>
           <h1>Login Page</h1><br />
           <Form onSubmit={formik.handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
               <Form.Control 
               id="username"
@@ -78,7 +75,7 @@
               <div style={{ color: 'red' }}>{formik.errors.username}</div>
             ) : null}
             {/* <br /> */}
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control 
               id="password"

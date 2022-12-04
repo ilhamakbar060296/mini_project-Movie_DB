@@ -2,12 +2,9 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import './App.css';
-import { useNavigate } from "react-router-dom";
 
 function App() {  
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();  
-  
+  const [data, setData] = useState([]); 
   const getData = () => {
     Axios.get(`${process.env.REACT_APP_BASEURL}/movie/popular?api_key=${process.env.REACT_APP_APIKEY}&language=en-US&page=1`)
     .then(response => {
@@ -15,7 +12,7 @@ function App() {
       setData(response.data.results)
       console.log(response.data.results[0].id)
     })
-  } 
+  }
   
   const getURL = (path) => {
     const url =  `${process.env.REACT_APP_BASEIMGURL}`+path;
@@ -24,7 +21,7 @@ function App() {
 
   const logOut = () => {
     localStorage.clear();
-    return navigate('/');    
+    return window.location.assign('/');    
   }
 
   useEffect(() => {
@@ -32,7 +29,8 @@ function App() {
   }, []);
 
   return (    
-    <>  
+    <> 
+    <br/>
     <button onClick={() => logOut()}>Logout</button> 
     <h1>FORM PRODUCT TABLE</h1>      
     <Table striped bordered hover variant="dark">

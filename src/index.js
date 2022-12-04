@@ -7,21 +7,13 @@ import Login from './login';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Protect = () => {
-  if(localStorage.getItem('session')){
-    return <App />
-  }else{
-    return <p>forbidden</p>
-  }
-};
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <>
-    {/* <Login /> */}
+    element: <> 
+    {localStorage.getItem('username') ? localStorage.getItem('username') : ''}
     <Outlet />
-  </>,        
+    </>,        
     errorElement: <p>Page Not Found</p>,
     children: [
       {
@@ -30,7 +22,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <Protect />
+        element: <>
+        {localStorage.getItem('session') ? <App /> : 'forbidden'}
+        </>        
       },
     ],
   },
