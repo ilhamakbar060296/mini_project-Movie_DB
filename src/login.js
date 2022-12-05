@@ -1,11 +1,14 @@
   import Axios from 'axios';  
   import './login.css';
   import { useFormik } from 'formik';
+  import { useState } from 'react';
   import * as Yup from 'yup';
   import Form from 'react-bootstrap/Form';
   import Button from 'react-bootstrap/Button';
   
   function Login() {
+  const [error, setError] = useState();
+  const [submit, setSubmit] = useState();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -20,6 +23,8 @@
         .required('Required'),
     }),
     onSubmit: values => {
+      setSubmit("Loading")
+      setError()
       console.log(values)
       // Movie DB auth step 1
        Axios.get(`${process.env.REACT_APP_BASEURL}authentication/token/new?api_key=${process.env.REACT_APP_APIKEY}`)
@@ -39,11 +44,16 @@
                    request_token: validatedRequestToken
                  }).then(res => {
                    const sessionID = res.data.session_id
+                   setSubmit()
                    console.log("Session ID : " + sessionID);
                    localStorage.setItem('session', sessionID)
                    localStorage.setItem('username', values.username)                                     
                    window.location.assign('/home');
                  })
+             }).catch(error => {
+              console.log("some error occurred", error)
+              setSubmit()
+              setError('Invalid Username or Password')
              })
          })
     },
@@ -91,8 +101,10 @@
               <div>{formik.errors.password}</div>
             ) : null}                     
             <Button variant="primary" type="submit">
-              Submit
-            </Button>
+              Login
+            </Button><br/><br/>
+            {submit ? <label>Loading...</label> : null}
+            {error ? <label>{error}</label>:null}
           </Form>
           </div>                  
         </div>      
