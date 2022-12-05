@@ -19,10 +19,10 @@ function App() {
     return url;
   }
 
-  const logOut = () => {
-    localStorage.clear();
-    return window.location.assign('/');    
-  }
+  // const logOut = () => {
+  //   localStorage.clear();
+  //   return window.location.assign('/');    
+  // }
 
   useEffect(() => {
     getData()
@@ -30,9 +30,9 @@ function App() {
 
   return (    
     <> 
-    <br/>
+    {/* <br/>
     <button onClick={() => logOut()}>Logout</button> 
-    <h1>FORM PRODUCT TABLE</h1>      
+    <h1>FORM PRODUCT TABLE</h1>       */}
     <Table striped bordered hover variant="dark">
         <thead>
           <tr>
