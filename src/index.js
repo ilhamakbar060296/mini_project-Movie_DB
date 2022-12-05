@@ -45,7 +45,17 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <>
-        {localStorage.getItem('session') ? <App /> : 'forbidden'}
+        {localStorage.getItem('session') ? 
+        <App /> : 
+        <div className='forbid-container'>
+          <div className='rectangle'>
+            <div className='login-page'>
+            <h1>Forbidden Entry</h1><br /> 
+            <img id='stop' src="https://img.freepik.com/free-vector/no-entry-hand-sign-isolated-white_1284-41869.jpg" alt="Stop"></img>            
+            </div>                  
+          </div>      
+        </div>        
+        }
         </>        
       },
     ],

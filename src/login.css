@@ -33,3 +33,14 @@
     margin-left: 25px;    
     width: 25vw;
 }
+.forbid-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;  
+    background: url(https://thumbs.dreamstime.com/b/forbidden-sign-transparent-background-vector-illustration-isolated-110093319.jpg);
+    background-size: 152px;
+    height: 100%;
+}
+#stop{
+    width: 300px;
+}
