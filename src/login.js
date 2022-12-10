@@ -46,9 +46,15 @@
                    const sessionID = res.data.session_id
                    setSubmit()
                    console.log("Session ID : " + sessionID);
-                   localStorage.setItem('session', sessionID)
-                   localStorage.setItem('username', values.username)                                     
-                   window.location.assign('/home');
+                   localStorage.setItem('session', sessionID);
+                   Axios.get(`${process.env.REACT_APP_BASEURL}account?api_key=${process.env.REACT_APP_APIKEY}&session_id=${sessionID}`)
+                   .then(res => {
+                      console.log(res);
+                      const user = res.data.username
+                      console.log("Username adalah "+user);
+                      localStorage.setItem('username', user)                                     
+                      window.location.assign('/home');
+                   })                  
                  })
              }).catch(error => {
               console.log("some error occurred", error)
